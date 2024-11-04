@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spot Metadata</title>
+    <script>
+        async function fetchMetadata() {
+            const response = await fetch('/get_metadata');
+            const data = await response.json();
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = JSON.stringify(data, null, 2);
+        }
+    </script>
+</head>
+<body>
+    <h1>Spot Metadata</h1>
+    <button onclick="fetchMetadata()">Get Metadata</button>
+    <pre id="result"></pre>
+
+    <h1>Get Spot Data</h1>
+    <form action="/get_spot_data" method="post">
+        <label for="spot_key">Spot Key:</label>
+        <input type="text" id="spot_key" name="spot_key" required><br>
+        <label for="fields">Fields:</label>
+        <input type="text" id="fields" name="fields" required><br>
+        <label for="from_date">From Date:</label>
+        <input type="date" id="from_date" name="from_date" required><br>
+        <label for="to_date">To Date:</label>
+        <input type="date" id="to_date" name="to_date" required><br>
+        <label for="currency">Currency:</label>
+        <input type="text" id="currency" name="currency" required><br>
+        <button type="submit">Get Spot Data</button>
+    </form>
+    <pre id="spot_result"></pre>
+</body>
+</html>
